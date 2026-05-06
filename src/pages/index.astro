@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LangBar from '../components/LangBar.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Events from '../components/Events.astro';
+import Column from '../components/Column.astro';
+import Donate from '../components/Donate.astro';
+import Social from '../components/Social.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="新二代留聲機 — 台灣移民青年倡議陣線" lang="zh-TW">
+  <LangBar current="zh-TW" />
+  <Nav lang="zh-TW" />
+  <main>
+    <Hero lang="zh-TW" />
+    <About lang="zh-TW" />
+    <Events lang="zh-TW" />
+    <Column lang="zh-TW" />
+    <Donate lang="zh-TW" />
+    <Social lang="zh-TW" />
+  </main>
+  <Footer lang="zh-TW" />
+</BaseLayout>

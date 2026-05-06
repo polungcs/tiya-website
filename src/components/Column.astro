@@ -1,0 +1,262 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang?: string;
+}
+const { lang = 'zh-TW' } = Astro.props;
+const isEn = lang === 'en';
+
+const all = await getCollection('columns', ({ data }) => data.featured !== false);
+// Oldest first → preserves the 01/02/03 reading order users expect for a series
+const articles = all
+  .sort((a, b) => a.data.publishedDate.getTime() - b.data.publishedDate.getTime())
+  .map((entry, i) => ({
+    num: String(i + 1).padStart(2, '0'),
+    href: entry.data.url,
+    title: entry.data.titleZh,
+    titleEn: entry.data.titleEn,
+    author: entry.data.authorZh,
+    authorEn: entry.data.authorEn,
+  }));
+---
+
+<section class="section warm" id="column">
+  <div class="container">
+    <h2 class="section-h">
+      {isEn ? 'CommonWealth Column' : '天下獨立評論專欄'}
+      <span class="accent">column</span>
+    </h2>
+
+    <div class="column-layout">
+      <!-- Articles side -->
+      <div class="articles-side">
+        <div class="cw-header">
+          <span class="cw-badge">獨立評論@天下</span>
+          <a href="https://opinion.cw.com.tw/blog/profile/531" target="_blank" rel="noopener">
+            {isEn ? 'View all articles →' : '查看全部文章 →'}
+          </a>
+        </div>
+
+        <div class="articles-list">
+          {articles.map(a => (
+            <a class="article" href={a.href} target="_blank" rel="noopener">
+              <div class="article-num">{a.num}</div>
+              <div class="article-body">
+                <h4>{isEn ? a.titleEn : a.title}</h4>
+                <div class="article-author">
+                  {isEn ? 'Author / ' : '作者 / '}
+                  <b>{isEn ? a.authorEn : a.author}</b>
+                </div>
+              </div>
+              <div class="article-arrow">→</div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Phonograph side -->
+      <div class="phonograph-side">
+        <div class="phonograph-wrap">
+          <img
+            src="/logo-phonograph.png"
+            alt="新二代留聲機"
+            class="phonograph-spin"
+          />
+          <div class="phonograph-label">
+            <span>{isEn ? 'New Generation' : '新二代'}</span>
+            <span>{isEn ? 'Phonograph' : '留聲機'}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: 28px 32px;
+    background: var(--cream);
+  }
+
+  .section.warm {
+    background: var(--cream-warm);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-h {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .section-h::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 3px;
+    background: var(--terra);
+    align-self: center;
+    flex-shrink: 0;
+  }
+
+  .accent {
+    color: var(--terra-deep);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 24px;
+  }
+
+  .column-layout {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 48px;
+    align-items: center;
+  }
+
+  /* ── Phonograph ── */
+  .phonograph-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .phonograph-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .phonograph-spin {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    animation: turntable 9s linear infinite;
+    box-shadow:
+      0 0 0 6px var(--cream-deep),
+      0 8px 28px rgba(184, 64, 30, 0.22);
+    display: block;
+  }
+
+  @keyframes turntable {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* Pause on hover so readers can inspect */
+  .phonograph-spin:hover {
+    animation-play-state: paused;
+  }
+
+  .phonograph-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--terra-deep);
+    letter-spacing: 0.12em;
+    opacity: 0.8;
+  }
+
+  /* ── CW header ── */
+  .cw-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    flex-wrap: wrap;
+  }
+
+  .cw-badge {
+    background: var(--terra-deep);
+    color: white;
+    padding: 5px 12px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  .cw-header a {
+    color: var(--terra-deep);
+    font-family: 'IBM Plex Sans', 'Noto Sans TC', sans-serif;
+    text-decoration: none;
+    border-bottom: 1px solid var(--terra);
+    padding-bottom: 1px;
+    transition: color 0.15s;
+  }
+
+  .cw-header a:hover {
+    color: var(--ink);
+  }
+
+  /* ── Article list ── */
+  .articles-list {
+    margin-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+
+  .article {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 24px;
+    padding: 22px 16px;
+    margin: 0 -16px;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s;
+  }
+
+  .article:hover {
+    background: white;
+  }
+
+  .article-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 36px;
+    color: var(--terra-deep);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .article-body h4 {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .article-author {
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-family: 'IBM Plex Sans', 'Noto Sans TC', sans-serif;
+  }
+
+  .article-arrow {
+    font-size: 18px;
+    color: var(--terra);
+    align-self: center;
+    transition: transform 0.15s;
+  }
+
+  .article:hover .article-arrow {
+    transform: translateX(4px);
+  }
+</style>

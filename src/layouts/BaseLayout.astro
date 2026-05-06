@@ -1,0 +1,54 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+  ogImage?: string;
+}
+
+const {
+  title = '新二代留聲機 — 台灣移民青年倡議陣線',
+  description = '由在臺移民第二代為主體所組成的倡議團體，關注台灣社會的移民工議題，以及新住民、新二代群體的多樣性。',
+  lang = 'zh-TW',
+  ogImage = '/hero-banner.png',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).toString();
+const siteName = '台灣移民青年倡議陣線協會 · Taiwan Immigration Youth Alliance';
+const ogLocale = lang === 'en' ? 'en_US' : 'zh_TW';
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/logo-tiya-square.png" />
+    <link rel="canonical" href={canonical} />
+    <title>{title}</title>
+
+    <!-- Open Graph (Facebook, LINE, Slack) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={ogLocale} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

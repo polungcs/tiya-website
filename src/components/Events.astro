@@ -1,0 +1,197 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang?: string;
+}
+const { lang = 'zh-TW' } = Astro.props;
+const isEn = lang === 'en';
+
+const all = await getCollection('events', ({ data }) => data.featured !== false);
+const events = all.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const fbEmbedSrc = (postUrl: string) =>
+  `https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(postUrl)}&show_text=true&width=500`;
+---
+
+<section class="section" id="events">
+  <div class="container">
+    <h2 class="section-h">
+      {isEn ? 'Events' : '實體活動'}
+      <span class="accent">events</span>
+    </h2>
+
+    <div class="events">
+      {events.map(({ data: e }) => {
+        const year = e.date.getFullYear();
+        return (
+          <article class="event-card">
+            {e.fbEmbedUrl && (
+              <div class="fb-embed">
+                <iframe
+                  src={fbEmbedSrc(e.fbEmbedUrl)}
+                  height="500"
+                  style="border:none;overflow:auto"
+                  scrolling="yes"
+                  frameborder="0"
+                  allowfullscreen="true"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                ></iframe>
+              </div>
+            )}
+            <div class="event-meta">
+              <span>{year} · {isEn ? e.regionEn : e.regionZh}</span>
+              <span class="event-meta-loc">·  {isEn ? e.locationEn : e.locationZh}</span>
+            </div>
+            <div class="event-body">
+              <h3>{isEn ? e.titleEn : e.titleZh}</h3>
+              <p>{isEn ? e.descriptionEn : e.descriptionZh}</p>
+              {(isEn ? e.quoteEn : e.quoteZh) && (
+                <p class="quote">{isEn ? e.quoteEn : e.quoteZh}</p>
+              )}
+            </div>
+            {e.tags.length > 0 && (
+              <div class="event-tags">
+                {e.tags.map(t => <span># {t}</span>)}
+              </div>
+            )}
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: 56px 32px;
+    background: var(--cream);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-h {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .section-h::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 3px;
+    background: var(--terra);
+    align-self: center;
+    flex-shrink: 0;
+  }
+
+  .accent {
+    color: var(--terra-deep);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 24px;
+  }
+
+  .events {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  @media (max-width: 720px) {
+    .events {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .event-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fb-embed {
+    width: 100%;
+    overflow: auto;
+    background: #f0f2f5;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fb-embed iframe {
+    width: 100% !important;
+    display: block;
+    border: none;
+  }
+
+  .event-meta {
+    padding: 16px 22px 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--terra-deep);
+    font-family: 'IBM Plex Sans', 'Noto Sans TC', sans-serif;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .event-meta-loc {
+    color: var(--ink-soft);
+  }
+
+  .event-body {
+    padding: 4px 22px 18px;
+    flex: 1;
+  }
+
+  .event-body h3 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .event-body p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+  }
+
+  .event-body p.quote {
+    font-family: 'Noto Serif TC', serif;
+    font-style: italic;
+    color: var(--ink);
+    border-left: 2px solid var(--terra);
+    padding-left: 12px;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+
+  .event-tags {
+    padding: 0 22px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .event-tags span {
+    font-size: 11px;
+    color: var(--terra-deep);
+    background: var(--cream-warm);
+    padding: 3px 9px;
+    border-radius: 100px;
+  }
+</style>

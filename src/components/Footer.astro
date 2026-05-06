@@ -1,0 +1,132 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'zh-TW' } = Astro.props;
+const isEn = lang === 'en';
+---
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="/logo-tiya-square.png" alt="TIYA logo" class="footer-logo" />
+      <div>
+        <div class="footer-name">台灣移民青年倡議陣線協會</div>
+        <div class="footer-name-en">Taiwan Immigration Youth Alliance</div>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h5>{isEn ? 'contact' : 'contact'}</h5>
+      <a href="mailto:2024tiya@gmail.com">2024tiya@gmail.com</a>
+    </div>
+
+    <div class="footer-col">
+      <h5>follow</h5>
+      <div class="footer-links">
+        <a href="https://www.facebook.com/TWmigrantchamber/" target="_blank" rel="noopener">Facebook</a>
+        <span>·</span>
+        <a href="https://www.instagram.com/2023_tiya/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-divider">
+    <span>© 2026 Taiwan Immigration Youth Alliance · {isEn ? 'Registered NGO, Taiwan' : '已正式立案登記'}</span>
+    <span>新二代留聲機 · 移民青年倡議陣線</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--ink);
+    color: var(--cream-warm);
+    padding: 48px 32px 24px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 48px;
+    align-items: start;
+    max-width: 1100px;
+    margin: 0 auto 36px;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .footer-name {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+  }
+
+  .footer-name-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+
+  .footer-col h5 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .footer-col a {
+    font-size: 13px;
+    color: var(--cream-warm);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.15s;
+  }
+
+  .footer-col a:hover {
+    opacity: 1;
+  }
+
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .footer-links span {
+    opacity: 0.4;
+  }
+
+  .footer-divider {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(250, 238, 218, 0.12);
+    font-size: 11px;
+    font-family: 'IBM Plex Sans', 'Noto Sans TC', sans-serif;
+    opacity: 0.5;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+</style>

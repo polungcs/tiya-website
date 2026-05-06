@@ -1,0 +1,164 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'zh-TW' } = Astro.props;
+const isEn = lang === 'en';
+---
+
+<section class="section warm" id="about">
+  <div class="container">
+    <h2 class="section-h">
+      {isEn ? 'About Us' : '關於我們'}
+      <span class="accent">about</span>
+    </h2>
+
+    <div class="about-grid">
+      <div class="about-text">
+        {isEn ? (
+          <>
+            <p>
+              We are an advocacy group led primarily by second-generation immigrants in Taiwan.
+              Our members' mothers or fathers came from Southeast Asia and Chinese-speaking countries —
+              immigrants who came to Taiwan and put down roots.
+            </p>
+            <p>
+              As both Taiwanese youth and children of immigrants, we pay attention to migrant worker
+              issues in Taiwanese society, and to the diversity of new residents and second-generation
+              immigrant communities in Taiwan.
+            </p>
+          </>
+        ) : (
+          <>
+            <p>
+              我們是一個由在臺移民第二代為主體所組成的倡議團體，團體的成員，母親或父親來自東南亞與華語世界的不同國家，是來到台灣落地生根的移民。
+            </p>
+            <p>
+              我們以同時作為臺灣青年與移民二代的視角，關注台灣社會的移民工議題，以及台灣社會的新住民、新二代群體的多樣性。
+            </p>
+          </>
+        )}
+      </div>
+
+      <div class="about-origins">
+        <div class="about-origins-label">our origins</div>
+        <div class="about-origins-list">
+          <span>越南</span><span>中國</span><span>泰國</span><span>印尼</span>
+          <span>菲律賓</span><span>馬來西亞</span><span>柬埔寨</span><span>寮國</span><span>緬甸</span>
+        </div>
+
+        <div class="values-grid">
+          {['對話', '人權', '倡議', '共榮'].map(v => (
+            <div class="value-chip">{v}</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: 56px 32px;
+    background: var(--cream);
+  }
+
+  .section.warm {
+    background: var(--cream-warm);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-h {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .section-h::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 3px;
+    background: var(--terra);
+    align-self: center;
+    flex-shrink: 0;
+  }
+
+  .accent {
+    color: var(--terra-deep);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 24px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 15px;
+    line-height: 1.9;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+
+  .about-origins {
+    background: white;
+    padding: 22px 24px;
+    border-left: 3px solid var(--terra);
+  }
+
+  .about-origins-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--terra-deep);
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .about-origins-list {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.9;
+  }
+
+  .about-origins-list span:not(:last-child)::after {
+    content: ' · ';
+    color: var(--terra);
+    margin: 0 6px;
+    font-weight: 700;
+  }
+
+  .values-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .value-chip {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--terra-deep);
+    background: var(--cream-warm);
+    border: 1px solid var(--line);
+    padding: 6px 16px;
+    letter-spacing: 0.1em;
+  }
+</style>

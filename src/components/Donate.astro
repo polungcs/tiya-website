@@ -1,0 +1,255 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'zh-TW' } = Astro.props;
+const isEn = lang === 'en';
+
+// Demo placeholders — 待協會帳戶開戶完成後填入
+const bankInfo = {
+  accountName: isEn ? 'TBD — to be confirmed after account opens' : '待確認（協會帳戶開戶完成後填入）',
+  bank: isEn ? 'TBD' : '待確認',
+  account: isEn ? 'TBD' : '待確認',
+  postal: isEn ? 'TBD' : '待確認',
+};
+
+// Notification form for after-the-fact bookkeeping — not a fundraising CTA.
+// 待核心成員提供正式表單後替換
+const notifyFormUrl = 'https://forms.gle/PLACEHOLDER';
+---
+
+<section class="section warm" id="donate">
+  <div class="container">
+    <h2 class="section-h">
+      {isEn ? 'Donation Information' : '捐款資訊'}
+      <span class="accent">donation</span>
+    </h2>
+
+    <div class="disclaimer">
+      <p>
+        {isEn
+          ? 'Note: This association has not applied for a public solicitation permit under Taiwan’s Public Charity Solicitations Act, and this page does not constitute fundraising solicitation. The information below is provided for reference to those who, of their own initiative, wish to support our operations by donation.'
+          : '說明：本協會尚未依《公益勸募條例》申請公益勸募許可，本網頁不為公開勸募之用。下方資訊僅供有意主動捐款支持本協會運作者參考。'}
+      </p>
+    </div>
+
+    <div class="info-grid">
+      <!-- Bank info -->
+      <div class="info-block">
+        <h3 class="sub-h">{isEn ? 'Bank account' : '匯款帳戶'}</h3>
+        <div class="bank-block">
+          <div class="bank-row">
+            <span class="bank-label">{isEn ? 'Account name' : '戶名'}</span>
+            <span class="bank-val">{bankInfo.accountName}</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">{isEn ? 'Bank' : '銀行'}</span>
+            <span class="bank-val">{bankInfo.bank}</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">{isEn ? 'Account #' : '帳號'}</span>
+            <span class="bank-val">{bankInfo.account}</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">{isEn ? 'Postal giro' : '郵政劃撥'}</span>
+            <span class="bank-val">{bankInfo.postal}</span>
+          </div>
+        </div>
+        <p class="placeholder-note">
+          {isEn
+            ? 'Bank details above are placeholders during the demo phase. They will be filled in once the association’s bank account is opened.'
+            : '上方匯款資訊為 demo 階段佔位，協會帳戶完成開戶後會正式填入。'}
+        </p>
+      </div>
+
+      <!-- Notification + receipts -->
+      <div class="info-block">
+        <h3 class="sub-h">{isEn ? 'After transfer' : '匯款後事項'}</h3>
+        <p class="info-p">
+          {isEn ? (
+            <>
+              If you have made a transfer, please use the notification form below
+              to let us know your remittance details, so that we can reconcile our records.
+              {' '}
+              <a class="text-link" href={notifyFormUrl} target="_blank" rel="noopener">
+                Notification form →
+              </a>
+            </>
+          ) : (
+            <>
+              如您完成匯款，請透過下方通知表單告知匯款資訊，以便本協會對帳。
+              {' '}
+              <a class="text-link" href={notifyFormUrl} target="_blank" rel="noopener">
+                匯款通知表單 →
+              </a>
+            </>
+          )}
+        </p>
+        <h4 class="mini-h">{isEn ? 'Receipts' : '收據'}</h4>
+        <p class="info-p small">
+          {isEn
+            ? 'As a registered NGO in Taiwan, we can issue donation receipts for personal income tax deduction purposes. Please indicate your preferred receipt name in the notification form.'
+            : '本協會為台灣立案非營利組織，可開立捐款收據（供個人所得稅扣除使用）。請於通知表單註明收據抬頭。'}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: 56px 32px;
+    background: var(--cream);
+  }
+
+  .section.warm {
+    background: var(--cream-warm);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-h {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .section-h::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 3px;
+    background: var(--terra);
+    align-self: center;
+    flex-shrink: 0;
+  }
+
+  .accent {
+    color: var(--terra-deep);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 24px;
+  }
+
+  /* Legal disclaimer block — neutral, factual, no marketing */
+  .disclaimer {
+    border-left: 2px solid var(--ink-soft);
+    background: rgba(92, 67, 23, 0.04);
+    padding: 14px 18px;
+    margin-bottom: 32px;
+  }
+
+  .disclaimer p {
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+
+  @media (max-width: 720px) {
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .sub-h {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mini-h {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--terra-deep);
+    margin: 18px 0 6px;
+    letter-spacing: 0.04em;
+  }
+
+  .bank-block {
+    background: white;
+    padding: 16px 20px;
+    border: 1px solid var(--line);
+    margin-bottom: 12px;
+  }
+
+  .bank-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 13px;
+  }
+
+  .bank-row:last-child {
+    border-bottom: 0;
+  }
+
+  .bank-label {
+    color: var(--ink-soft);
+    font-family: 'IBM Plex Sans', 'Noto Sans TC', sans-serif;
+    letter-spacing: 0.04em;
+  }
+
+  .bank-val {
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', 'Noto Sans TC', sans-serif;
+  }
+
+  .placeholder-note {
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--terra-deep);
+    background: rgba(206, 89, 66, 0.08);
+    padding: 8px 12px;
+    margin: 0;
+  }
+
+  .info-p {
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+
+  .info-p.small {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .text-link {
+    color: var(--terra-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--terra);
+    padding-bottom: 1px;
+    font-family: 'IBM Plex Sans', 'Noto Sans TC', sans-serif;
+    white-space: nowrap;
+  }
+
+  .text-link:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+</style>

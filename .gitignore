@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+
+# Netlify CLI
+.netlify/
+
+# Logs
+npm-debug.log*
+*.log
+
+# Editor
+.vscode/
+.idea/

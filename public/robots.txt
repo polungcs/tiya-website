@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://stellular-froyo-8d1861.netlify.app/sitemap-index.xml
