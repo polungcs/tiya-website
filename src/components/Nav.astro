@@ -142,22 +142,27 @@ const links = isEn
     }
 
     .nav-items {
-      /* Visually distinct band: warm cream background, edge-to-edge */
+      /* Floating cream-warm band: edge-to-edge + soft drop shadow */
       margin: 16px -16px 0;
-      padding: 14px 16px;
+      padding: 14px 8px;
       background: var(--cream-warm);
       border-top: 1px solid var(--line);
       border-left: 0;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 4px 2px;
+      box-shadow:
+        0 -1px 3px rgba(0, 0, 0, 0.03),
+        0 4px 12px rgba(184, 64, 30, 0.08);
+      /* All five items on one row */
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      gap: 0;
       font-size: 15px;
       font-weight: 500;
     }
 
     .nav-items a {
-      padding: 8px 14px;
-      letter-spacing: 0.05em;
+      padding: 8px 6px;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
     }
   }
 </style>
