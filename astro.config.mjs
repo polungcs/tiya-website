@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://stellular-froyo-8d1861.netlify.app',
+  site: 'https://sensational-dusk-b9aae4.netlify.app',
   integrations: [
     tailwind({ applyBaseStyles: false }),
     sitemap(),

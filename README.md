@@ -123,16 +123,18 @@ featured: true
 
 ## 部署到 Netlify
 
-目前用 **Netlify Drop**（手動拖曳）。每次內容更新後：
+已接 GitHub 自動部署。改完內容只要 `git push` 到 `main`，Netlify 會偵測到 commit 並自動 build + 部署。
 
-1. 跑 `npm run build` — 產出 `dist/` 資料夾
-2. 登入 Netlify Dashboard → 進入這個 site → **Deploys** 分頁
-3. 把整個 `dist/` 資料夾拖到頁面下方的 deploy area
-4. 等 ~30 秒，新版本就上線了
+```bash
+git add -A
+git commit -m "說明這次改了什麼"
+git push
+```
 
-線上 demo 網址：[stellular-froyo-8d1861.netlify.app](https://stellular-froyo-8d1861.netlify.app/)
+build log 在 Netlify dashboard 的 **Deploys** 分頁看，正常 1~2 分鐘上線。
 
-> **未來改善**：接 GitHub repo + Netlify 自動部署，git push 就自動 build + 部署。藍圖階段 0 規劃要做。
+線上網址：[sensational-dusk-b9aae4.netlify.app](https://sensational-dusk-b9aae4.netlify.app/)
+GitHub repo：[github.com/polungcs/tiya-website](https://github.com/polungcs/tiya-website)
 
 ---
 
