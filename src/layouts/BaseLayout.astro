@@ -1,5 +1,6 @@
 ---
 import { getImage } from 'astro:assets';
+import { ViewTransitions } from 'astro:transitions';
 import faviconImage from '../assets/logo-tiya-square.png';
 import heroBannerImage from '../assets/hero-banner.png';
 
@@ -56,6 +57,9 @@ const ogLocale = lang === 'en' ? 'en_US' : 'zh_TW';
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Smooth page transitions (lang switch, future multi-page nav) -->
+    <ViewTransitions />
   </head>
   <body>
     <slot />
