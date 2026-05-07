@@ -55,17 +55,19 @@ const articles = all
         </div>
       </div>
 
-      <!-- Phonograph side -->
+      <!-- Phonograph side: static logo with separately-spinning vinyl overlay -->
       <div class="phonograph-side">
         <div class="phonograph-wrap">
           <img
             src="/logo-phonograph.png"
             alt="新二代留聲機"
-            class="phonograph-spin"
+            class="phonograph-base"
           />
-          <div class="phonograph-label">
-            <span>{isEn ? 'New Generation' : '新二代'}</span>
-            <span>{isEn ? 'Phonograph' : '留聲機'}</span>
+          <div class="vinyl-spin" aria-hidden="true">
+            <span class="vinyl-text">
+              <span>新二代</span>
+              <span>留聲機</span>
+            </span>
           </div>
         </div>
       </div>
@@ -131,21 +133,63 @@ const articles = all
   }
 
   .phonograph-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
+    position: relative;
+    width: 200px;
+    height: 200px;
   }
 
-  .phonograph-spin {
-    width: 180px;
-    height: 180px;
+  /* Static logo (turntable case + needle + outer terra-red disc) */
+  .phonograph-base {
+    width: 100%;
+    height: 100%;
+    display: block;
     border-radius: 50%;
-    animation: turntable 9s linear infinite;
     box-shadow:
       0 0 0 6px var(--cream-deep),
       0 8px 28px rgba(184, 64, 30, 0.22);
-    display: block;
+  }
+
+  /* Spinning vinyl overlay — covers the static vinyl drawn into the logo image.
+     Position/size tuned to align with the vinyl in logo-phonograph.png. */
+  .vinyl-spin {
+    position: absolute;
+    top: 27%;
+    left: 21%;
+    width: 58%;
+    height: 58%;
+    border-radius: 50%;
+    background:
+      /* center pinhole */
+      radial-gradient(circle at center, var(--ink) 0 2.5%, transparent 2.6% 100%),
+      /* concentric grooves */
+      repeating-radial-gradient(
+        circle at center,
+        #0a0a0a 0,
+        #0a0a0a 2.5%,
+        #1a1a1a 2.6%,
+        #1a1a1a 3%
+      ),
+      /* base disc with subtle highlight */
+      radial-gradient(circle at 35% 35%, #2a2a2a 0%, #0a0a0a 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: turntable 9s linear infinite;
+    transform-origin: center;
+  }
+
+  .vinyl-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.14em;
+    line-height: 1.05;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   @keyframes turntable {
@@ -153,22 +197,9 @@ const articles = all
     to   { transform: rotate(360deg); }
   }
 
-  /* Pause on hover so readers can inspect */
-  .phonograph-spin:hover {
+  /* Pause spin on hover so readers can read the label clearly */
+  .phonograph-wrap:hover .vinyl-spin {
     animation-play-state: paused;
-  }
-
-  .phonograph-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    font-family: 'Noto Serif TC', serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--terra-deep);
-    letter-spacing: 0.12em;
-    opacity: 0.8;
   }
 
   /* ── CW header ── */
@@ -285,9 +316,14 @@ const articles = all
       order: -1;
     }
 
-    .phonograph-spin {
-      width: 140px;
-      height: 140px;
+    .phonograph-wrap {
+      width: 160px;
+      height: 160px;
+    }
+
+    .vinyl-text {
+      font-size: 18px;
+      letter-spacing: 0.1em;
     }
 
     .article {
