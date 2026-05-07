@@ -41,6 +41,16 @@ const ogLocale = lang === 'en' ? 'en_US' : 'zh_TW';
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" href={faviconImage.src} />
     <link rel="canonical" href={canonical} />
+
+    <!-- Fonts: preconnect for early DNS+TLS, then load stylesheet
+         (display=swap so text shows immediately with fallback) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500&family=Cormorant+Garamond:ital,wght@1,500&family=IBM+Plex+Sans:wght@400;500&display=swap"
+    />
+
     <title>{title}</title>
 
     <!-- Open Graph (Facebook, LINE, Slack) -->

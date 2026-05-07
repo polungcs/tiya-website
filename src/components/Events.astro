@@ -30,7 +30,9 @@ const fbEmbedSrc = (postUrl: string) =>
               <div class="fb-embed">
                 <iframe
                   src={fbEmbedSrc(e.fbEmbedUrl)}
+                  title={`Facebook 貼文：${isEn ? e.titleEn : e.titleZh}`}
                   height="500"
+                  loading="lazy"
                   style="border:none;overflow:auto"
                   scrolling="yes"
                   frameborder="0"

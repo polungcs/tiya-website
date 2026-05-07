@@ -45,7 +45,7 @@ const articles = all
             <a class="article" href={a.href} target="_blank" rel="noopener">
               <div class="article-num">{a.num}</div>
               <div class="article-body">
-                <h4>{isEn ? a.titleEn : a.title}</h4>
+                <h3>{isEn ? a.titleEn : a.title}</h3>
                 <div class="article-author">
                   {isEn ? 'Author / ' : '作者 / '}
                   <b>{isEn ? a.authorEn : a.author}</b>
@@ -271,7 +271,7 @@ const articles = all
     line-height: 1;
   }
 
-  .article-body h4 {
+  .article-body h3 {
     font-size: 17px;
     font-weight: 600;
     line-height: 1.5;
@@ -342,7 +342,7 @@ const articles = all
       font-size: 28px;
     }
 
-    .article-body h4 {
+    .article-body h3 {
       font-size: 15px;
     }
   }

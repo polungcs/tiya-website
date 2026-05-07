@@ -20,12 +20,12 @@ const isEn = lang === 'en';
     </div>
 
     <div class="footer-col">
-      <h5>{isEn ? 'contact' : 'contact'}</h5>
+      <h3>{isEn ? 'contact' : 'contact'}</h3>
       <a href="mailto:2024tiya@gmail.com">2024tiya@gmail.com</a>
     </div>
 
     <div class="footer-col">
-      <h5>follow</h5>
+      <h3>follow</h3>
       <div class="footer-links">
         <a href="https://www.facebook.com/TWmigrantchamber/" target="_blank" rel="noopener">Facebook</a>
         <span>·</span>
@@ -85,14 +85,17 @@ const isEn = lang === 'en';
     margin-top: 2px;
   }
 
-  .footer-col h5 {
+  .footer-col h3 {
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--terra);
+    /* Use --orange (#EF9F27) for sufficient contrast against ink bg.
+       --terra fails WCAG AA contrast ratio at this size. */
+    color: var(--orange);
     margin-bottom: 10px;
     font-weight: 500;
+    margin-top: 0;
   }
 
   .footer-col a {
