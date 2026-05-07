@@ -120,7 +120,7 @@ const links = isEn
     .nav {
       height: auto;
       flex-direction: column;
-      padding: 4px 16px 6px;
+      padding: 4px 16px 14px;
       gap: 0;
     }
 
@@ -138,17 +138,23 @@ const links = isEn
     }
 
     .nav-items {
+      /* Pull away from logo with clear separator: top border + padding */
+      width: 100%;
       margin-left: 0;
-      padding-left: 0;
+      margin-top: 14px;
+      padding: 14px 0 0;
       border-left: 0;
+      border-top: 1px solid var(--line);
       flex-wrap: wrap;
       justify-content: center;
-      gap: 4px 0;
-      font-size: 12px;
+      gap: 4px 2px;
+      font-size: 14px;
+      font-weight: 500;
     }
 
     .nav-items a {
-      padding: 4px 12px;
+      padding: 8px 14px;
+      letter-spacing: 0.05em;
     }
   }
 </style>
