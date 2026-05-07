@@ -120,14 +120,20 @@ const links = isEn
 
     .nav-logo-link {
       margin-left: 0;
-      /* Trim cream space tightly around the logo glyph */
-      margin-top: -16px;
-      margin-bottom: -16px;
+      width: 100%;
+      max-width: 460px;
+      /* Crop down to the actual content area of the PNG (which is the
+         top ~40% of the image; the rest is transparent whitespace). */
+      aspect-ratio: 460 / 145;
+      display: block;
     }
 
     .brand-logo {
-      height: 300px;
-      max-width: 620px;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 22%;
     }
 
     .nav-items {
