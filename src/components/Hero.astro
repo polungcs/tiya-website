@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import heroBanner from '../assets/hero-banner.png';
+
 interface Props {
   lang?: string;
 }
@@ -8,10 +11,14 @@ const isEn = lang === 'en';
 
 <section class="hero">
   <!-- Banner: sits on right side only, does NOT fill full width -->
-  <img
+  <Image
     class="hero-bg"
-    src="/hero-banner.png"
+    src={heroBanner}
     alt="對話・人權・倡議・共榮"
+    widths={[400, 800, 1200, 1600]}
+    sizes="(max-width: 768px) 100vw, 52vw"
+    loading="eager"
+    fetchpriority="high"
   />
   <!-- Gradient: solid orange on left (text area), fades to transparent on right -->
   <div class="hero-overlay"></div>

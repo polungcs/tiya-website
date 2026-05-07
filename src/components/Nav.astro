@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logoHorizontal from '../assets/logo-tiya-horizontal.png';
+
 interface Props {
   lang?: string;
 }
@@ -26,10 +29,13 @@ const links = isEn
 
 <nav class="nav">
   <a href={isEn ? '/en/' : '/'} class="nav-logo-link">
-    <img
+    <Image
       class="brand-logo"
-      src="/logo-tiya-horizontal.png"
+      src={logoHorizontal}
       alt="新二代留聲機 移民青年倡議陣線 logo"
+      widths={[480, 720, 1400]}
+      sizes="(max-width: 768px) 460px, 700px"
+      loading="eager"
     />
   </a>
   <div class="nav-items">

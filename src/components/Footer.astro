@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logoSquare from '../assets/logo-tiya-square.png';
+
 interface Props {
   lang?: string;
 }
@@ -9,7 +12,7 @@ const isEn = lang === 'en';
 <footer class="footer">
   <div class="footer-top">
     <div class="footer-brand">
-      <img src="/logo-tiya-square.png" alt="TIYA logo" class="footer-logo" />
+      <Image src={logoSquare} alt="TIYA logo" class="footer-logo" widths={[48, 96]} sizes="48px" />
       <div>
         <div class="footer-name">台灣移民青年倡議陣線協會</div>
         <div class="footer-name-en">Taiwan Immigration Youth Alliance</div>

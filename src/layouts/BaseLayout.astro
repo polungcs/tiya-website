@@ -1,4 +1,8 @@
 ---
+import { getImage } from 'astro:assets';
+import faviconImage from '../assets/logo-tiya-square.png';
+import heroBannerImage from '../assets/hero-banner.png';
+
 interface Props {
   title?: string;
   description?: string;
@@ -6,11 +10,20 @@ interface Props {
   ogImage?: string;
 }
 
+// Pre-render a JPG for OG (most universally compatible across FB / LINE /
+// Slack / Twitter; PNG would be 1.4MB before compression).
+const ogImageRendered = await getImage({
+  src: heroBannerImage,
+  format: 'jpg',
+  width: 1200,
+  quality: 82,
+});
+
 const {
   title = '新二代留聲機 — 台灣移民青年倡議陣線',
   description = '由在臺移民第二代為主體所組成的倡議團體，關注台灣社會的移民工議題，以及新住民、新二代群體的多樣性。',
   lang = 'zh-TW',
-  ogImage = '/hero-banner.png',
+  ogImage = ogImageRendered.src,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
@@ -25,7 +38,7 @@ const ogLocale = lang === 'en' ? 'en_US' : 'zh_TW';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/png" href="/logo-tiya-square.png" />
+    <link rel="icon" type="image/png" href={faviconImage.src} />
     <link rel="canonical" href={canonical} />
     <title>{title}</title>
 
