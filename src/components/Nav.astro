@@ -160,9 +160,21 @@ const links = isEn
     }
 
     .nav-items a {
-      padding: 8px 6px;
+      padding: 8px 4px;
       letter-spacing: 0.04em;
       white-space: nowrap;
+    }
+  }
+
+  /* ── Very small phones (≤360px, e.g. iPhone SE) ── */
+  @media (max-width: 360px) {
+    .nav-items {
+      font-size: 13px;
+    }
+
+    .nav-items a {
+      padding: 8px 2px;
+      letter-spacing: 0.02em;
     }
   }
 </style>

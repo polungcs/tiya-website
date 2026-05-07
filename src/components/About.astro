@@ -135,6 +135,8 @@ const isEn = lang === 'en';
     font-size: 16px;
     font-weight: 500;
     line-height: 1.9;
+    /* Don't break inside CJK words (e.g. 馬來西亞 staying as one unit) */
+    word-break: keep-all;
   }
 
   .about-origins-list span:not(:last-child)::after {
