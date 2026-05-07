@@ -120,8 +120,12 @@ const links = isEn
     .nav {
       height: auto;
       flex-direction: column;
-      padding: 4px 16px 14px;
+      /* extra top padding so wave logo isn't tight against lang bar */
+      padding: 24px 16px 0;
       gap: 0;
+      /* desktop nav has overflow:hidden — unset so the nav-items
+         band can extend edge-to-edge with negative side margins */
+      overflow: visible;
     }
 
     .nav-logo-link {
@@ -138,17 +142,16 @@ const links = isEn
     }
 
     .nav-items {
-      /* Pull away from logo with clear separator: top border + padding */
-      width: 100%;
-      margin-left: 0;
-      margin-top: 14px;
-      padding: 14px 0 0;
-      border-left: 0;
+      /* Visually distinct band: warm cream background, edge-to-edge */
+      margin: 16px -16px 0;
+      padding: 14px 16px;
+      background: var(--cream-warm);
       border-top: 1px solid var(--line);
+      border-left: 0;
       flex-wrap: wrap;
       justify-content: center;
       gap: 4px 2px;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 500;
     }
 
