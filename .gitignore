@@ -28,3 +28,8 @@ npm-debug.log*
 /logo-tiya-horizontal.png
 /logo-tiya-square.png
 /logo.png
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
