@@ -108,4 +108,37 @@ const links = isEn
   .nav-items a:hover::after {
     transform: scaleX(1);
   }
+
+  /* ── Mobile (≤768px) ── */
+  @media (max-width: 768px) {
+    .nav {
+      height: auto;
+      flex-direction: column;
+      padding: 12px 16px 8px;
+      gap: 8px;
+    }
+
+    .nav-logo-link {
+      margin-left: 0;
+    }
+
+    .brand-logo {
+      height: 64px;
+      max-width: 240px;
+    }
+
+    .nav-items {
+      margin-left: 0;
+      padding-left: 0;
+      border-left: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4px 0;
+      font-size: 12px;
+    }
+
+    .nav-items a {
+      padding: 4px 12px;
+    }
+  }
 </style>

@@ -161,4 +161,33 @@ const isEn = lang === 'en';
     padding: 6px 16px;
     letter-spacing: 0.1em;
   }
+
+  /* ── Mobile (≤768px) ── */
+  @media (max-width: 768px) {
+    .section {
+      padding: 40px 20px;
+    }
+
+    .section-h {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .accent {
+      font-size: 18px;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .about-text p {
+      font-size: 14px;
+    }
+
+    .about-origins-list {
+      font-size: 15px;
+    }
+  }
 </style>

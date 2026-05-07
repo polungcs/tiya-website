@@ -107,9 +107,27 @@ const fbEmbedSrc = (postUrl: string) =>
     gap: 32px;
   }
 
-  @media (max-width: 720px) {
+  @media (max-width: 768px) {
+    .section {
+      padding: 40px 20px;
+    }
+
+    .section-h {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .accent {
+      font-size: 18px;
+    }
+
     .events {
       grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .event-body h3 {
+      font-size: 15px;
     }
   }
 

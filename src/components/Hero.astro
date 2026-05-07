@@ -137,4 +137,50 @@ const isEn = lang === 'en';
     line-height: 1.9;
     opacity: 0.96;
   }
+
+  /* ── Mobile (≤768px) ── */
+  @media (max-width: 768px) {
+    .hero {
+      min-height: auto;
+    }
+
+    /* Hide the right-side banner image — too cramped on phones.
+       The 4 values (對話/人權/倡議/共榮) still appear in About section. */
+    .hero-bg {
+      display: none;
+    }
+
+    .hero-overlay {
+      background: var(--orange);
+    }
+
+    .hero-content {
+      padding: 40px 24px 48px;
+      margin-left: 0;
+      max-width: 100%;
+    }
+
+    .hero-content h1 {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    .hero-content h2 {
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .hero-eng {
+      font-size: 16px;
+    }
+
+    .hero-rule {
+      margin: 18px 0;
+    }
+
+    .hero-content p {
+      font-size: 14px;
+      line-height: 1.85;
+    }
+  }
 </style>

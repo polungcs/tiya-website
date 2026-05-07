@@ -259,4 +259,50 @@ const articles = all
   .article:hover .article-arrow {
     transform: translateX(4px);
   }
+
+  /* ── Mobile (≤768px) ── */
+  @media (max-width: 768px) {
+    .section {
+      padding: 32px 20px;
+    }
+
+    .section-h {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .accent {
+      font-size: 18px;
+    }
+
+    .column-layout {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    /* Show phonograph FIRST on mobile — visual draw */
+    .phonograph-side {
+      order: -1;
+    }
+
+    .phonograph-spin {
+      width: 140px;
+      height: 140px;
+    }
+
+    .article {
+      grid-template-columns: 40px 1fr auto;
+      gap: 14px;
+      padding: 18px 8px;
+      margin: 0 -8px;
+    }
+
+    .article-num {
+      font-size: 28px;
+    }
+
+    .article-body h4 {
+      font-size: 15px;
+    }
+  }
 </style>

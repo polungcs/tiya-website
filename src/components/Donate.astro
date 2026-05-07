@@ -162,9 +162,38 @@ const notifyFormUrl = 'https://forms.gle/PLACEHOLDER';
     align-items: start;
   }
 
-  @media (max-width: 720px) {
+  @media (max-width: 768px) {
+    .section {
+      padding: 40px 20px;
+    }
+
+    .section-h {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .accent {
+      font-size: 18px;
+    }
+
     .info-grid {
       grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .bank-row {
+      grid-template-columns: 70px 1fr;
+      gap: 12px;
+      font-size: 12px;
+    }
+
+    .disclaimer {
+      padding: 12px 14px;
+      margin-bottom: 24px;
+    }
+
+    .disclaimer p {
+      font-size: 12.5px;
     }
   }
 
