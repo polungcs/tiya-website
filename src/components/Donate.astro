@@ -251,7 +251,10 @@ const notifyFormUrl = 'https://forms.gle/PLACEHOLDER';
     font-size: 12px;
     line-height: 1.7;
     color: var(--terra-deep);
-    background: rgba(206, 89, 66, 0.08);
+    /* Solid white background — tinted alpha over warm cream section
+       failed WCAG AA contrast at 12px. */
+    background: white;
+    border-left: 3px solid var(--terra);
     padding: 8px 12px;
     margin: 0;
   }
