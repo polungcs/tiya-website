@@ -151,18 +151,24 @@ const links = isEn
       box-shadow:
         0 -1px 3px rgba(0, 0, 0, 0.03),
         0 4px 12px rgba(184, 64, 30, 0.08);
-      /* All five items on one row */
+      /* All five items on one row, evenly distributed */
       flex-wrap: nowrap;
-      justify-content: space-around;
+      justify-content: space-evenly;
       gap: 0;
       font-size: 15px;
       font-weight: 500;
     }
 
     .nav-items a {
-      padding: 8px 4px;
+      padding: 8px 8px;
       letter-spacing: 0.04em;
       white-space: nowrap;
+    }
+
+    /* Subtle vertical divider between items so they read as
+       distinct options instead of one run-on text block. */
+    .nav-items a:not(:last-child) {
+      border-right: 1px solid rgba(184, 64, 30, 0.22);
     }
   }
 
@@ -173,7 +179,7 @@ const links = isEn
     }
 
     .nav-items a {
-      padding: 8px 2px;
+      padding: 8px 4px;
       letter-spacing: 0.02em;
     }
   }
