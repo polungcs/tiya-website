@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sensational-dusk-b9aae4.netlify.app/sitemap-index.xml
+Sitemap: https://tiya-website.leepolung1.workers.dev/sitemap-index.xml

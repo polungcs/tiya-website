@@ -121,9 +121,9 @@ featured: true
 
 ---
 
-## 部署到 Netlify
+## 部署（Cloudflare Workers Static Assets）
 
-已接 GitHub 自動部署。改完內容只要 `git push` 到 `main`，Netlify 會偵測到 commit 並自動 build + 部署。
+已接 GitHub 自動部署。改完內容只要 `git push` 到 `main`，Cloudflare 會偵測到 commit 並自動 build + 部署。
 
 ```bash
 git add -A
@@ -131,10 +131,12 @@ git commit -m "說明這次改了什麼"
 git push
 ```
 
-build log 在 Netlify dashboard 的 **Deploys** 分頁看，正常 1~2 分鐘上線。
+build log 在 Cloudflare dashboard 的 **Workers & Pages → tiya-website → Deployments** 分頁看，正常 30 秒~2 分鐘上線。
 
-線上網址：[sensational-dusk-b9aae4.netlify.app](https://sensational-dusk-b9aae4.netlify.app/)
+線上網址：[tiya-website.leepolung1.workers.dev](https://tiya-website.leepolung1.workers.dev/)
 GitHub repo：[github.com/polungcs/tiya-website](https://github.com/polungcs/tiya-website)
+
+**為什麼是 Workers，不是 Pages？** Cloudflare 已將兩者合併到統一的 dashboard，新建專案時介面預設導向 Workers，但對純靜態網站來說行為跟 Pages 完全相同（Workers Static Assets）。免費額度比 Netlify 寬鬆很多（500 builds/月、無限頻寬）。
 
 ---
 
