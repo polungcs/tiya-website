@@ -21,3 +21,10 @@ npm-debug.log*
 
 # Claude Code local settings
 .claude/
+
+# Root-level logo duplicates (canonical copies live in public/)
+/hero-banner.png
+/logo-phonograph.png
+/logo-tiya-horizontal.png
+/logo-tiya-square.png
+/logo.png
