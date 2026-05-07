@@ -122,9 +122,11 @@ const links = isEn
       margin-left: 0;
       width: 100%;
       max-width: 460px;
-      /* Crop down to the actual content area of the PNG (which is the
-         top ~40% of the image; the rest is transparent whitespace). */
-      aspect-ratio: 460 / 145;
+      /* Crop the empty bottom half of the PNG. Container fraction tuned
+         to fit wave + Chinese label + English label with ~5% breathing
+         on top and bottom; object-position shifts the visible window
+         up so the bottom whitespace is hidden. */
+      aspect-ratio: 460 / 180;
       display: block;
     }
 
@@ -133,7 +135,7 @@ const links = isEn
       height: 100%;
       display: block;
       object-fit: cover;
-      object-position: center 22%;
+      object-position: center 18%;
     }
 
     .nav-items {
