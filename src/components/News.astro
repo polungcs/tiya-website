@@ -1,0 +1,360 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang?: string;
+}
+const { lang = 'zh-TW' } = Astro.props;
+const isEn = lang === 'en';
+
+const all = await getCollection('news', ({ data }) => data.featured !== false);
+const items = all.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const fmtDate = (d: Date) =>
+  isEn
+    ? d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+    : `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+---
+
+<section class="section" id="news">
+  <div class="container">
+    <h2 class="section-h">
+      {isEn ? 'In the News' : '媒體報導'}
+      <span class="accent">news</span>
+    </h2>
+
+    <div class="news-carousel">
+      <button class="carousel-btn prev" type="button" aria-label={isEn ? 'Previous' : '上一篇'} hidden>‹</button>
+
+      <div
+        class="news-scroll"
+        data-news-scroll
+        role="region"
+        aria-label={isEn ? 'News coverage carousel' : '媒體報導列表'}
+        tabindex="0"
+      >
+        {items.map(({ data: n }) => (
+          <a class="news-card" href={n.url} target="_blank" rel="noopener">
+            <div class="news-meta">
+              <span class="news-source">{isEn ? n.sourceEn : n.sourceZh}</span>
+              <span class="news-date">{fmtDate(n.date)}</span>
+            </div>
+            <h3 class="news-title">{isEn ? n.titleEn : n.titleZh}</h3>
+            <p class="news-summary">{isEn ? n.summaryEn : n.summaryZh}</p>
+            <span class="news-link">
+              {isEn ? 'Read article →' : '閱讀全文 →'}
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <button class="carousel-btn next" type="button" aria-label={isEn ? 'Next' : '下一篇'} hidden>›</button>
+    </div>
+
+    <div class="news-hint" aria-hidden="true">
+      {isEn ? '← swipe to see more →' : '← 左右滑動查看更多 →'}
+    </div>
+  </div>
+</section>
+
+<script>
+  const carousels = document.querySelectorAll<HTMLElement>('[data-news-scroll]');
+  carousels.forEach((scroller) => {
+    const wrap = scroller.parentElement;
+    if (!wrap) return;
+    const prev = wrap.querySelector<HTMLButtonElement>('.carousel-btn.prev');
+    const next = wrap.querySelector<HTMLButtonElement>('.carousel-btn.next');
+
+    const step = () => {
+      const card = scroller.querySelector<HTMLElement>('.news-card');
+      if (!card) return scroller.clientWidth * 0.8;
+      const style = getComputedStyle(scroller);
+      const gap = parseFloat(style.columnGap || style.gap || '0') || 0;
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    const sync = () => {
+      const max = scroller.scrollWidth - scroller.clientWidth;
+      const overflowing = max > 2;
+      if (!overflowing) {
+        prev?.setAttribute('hidden', '');
+        next?.setAttribute('hidden', '');
+        return;
+      }
+      prev?.removeAttribute('hidden');
+      next?.removeAttribute('hidden');
+      prev?.toggleAttribute('disabled', scroller.scrollLeft <= 2);
+      next?.toggleAttribute('disabled', scroller.scrollLeft >= max - 2);
+    };
+
+    prev?.addEventListener('click', () => scroller.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next?.addEventListener('click', () => scroller.scrollBy({ left: step(), behavior: 'smooth' }));
+    scroller.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    requestAnimationFrame(sync);
+  });
+</script>
+
+<style>
+  .section {
+    padding: 56px 32px;
+    background: var(--cream);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-h {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .section-h::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 3px;
+    background: var(--terra);
+    align-self: center;
+    flex-shrink: 0;
+  }
+
+  .accent {
+    color: var(--terra-deep);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 24px;
+  }
+
+  /* ── Carousel wrap (positions the prev/next buttons relative to scroller) ── */
+  .news-carousel {
+    position: relative;
+  }
+
+  /* ── Horizontal scroll container with snap ── */
+  .news-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scroll-padding: 4px;
+    padding: 4px 4px 18px;
+    /* Prevent vertical scroll-chaining on touch devices */
+    overscroll-behavior-x: contain;
+    /* Hide native scrollbar — affordance is the prev/next buttons + peek */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .news-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .news-scroll:focus-visible {
+    outline: 2px solid var(--terra);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  /* ── Cards ── */
+  .news-card {
+    flex: 0 0 360px;
+    scroll-snap-align: start;
+    background: white;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--terra);
+    border-radius: 4px;
+    padding: 22px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-left-color 0.18s ease;
+  }
+
+  .news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(184, 64, 30, 0.12);
+    border-left-color: var(--terra-deep);
+  }
+
+  .news-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: 'IBM Plex Sans', 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+
+  .news-source {
+    background: var(--terra-deep);
+    color: white;
+    padding: 4px 10px;
+    font-weight: 500;
+  }
+
+  .news-date {
+    color: var(--ink-soft);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+
+  .news-title {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.55;
+    color: var(--ink);
+    /* Keep CJK words intact (e.g. 移民工治理) */
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .news-summary {
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin: 0;
+    flex: 1;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .news-link {
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--terra-deep);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: transform 0.15s ease;
+  }
+
+  .news-card:hover .news-link {
+    transform: translateX(3px);
+  }
+
+  /* ── Prev/Next buttons (desktop only — touch users swipe) ── */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid var(--line);
+    color: var(--terra-deep);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 2px 10px rgba(184, 64, 30, 0.12);
+    transition: background 0.15s, color 0.15s, opacity 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .carousel-btn.prev {
+    left: -18px;
+  }
+
+  .carousel-btn.next {
+    right: -18px;
+  }
+
+  .carousel-btn:hover:not([disabled]) {
+    background: var(--terra-deep);
+    color: white;
+  }
+
+  .carousel-btn[disabled] {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .carousel-btn[hidden] {
+    display: none;
+  }
+
+  /* ── Mobile swipe hint ── */
+  .news-hint {
+    margin-top: 6px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-soft);
+    opacity: 0.7;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── Mobile (≤768px) ── */
+  @media (max-width: 768px) {
+    .section {
+      padding: 40px 20px;
+    }
+
+    .section-h {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .accent {
+      font-size: 18px;
+    }
+
+    .news-scroll {
+      gap: 14px;
+      /* Card edge aligns with section padding — feels intentional */
+      padding: 4px 4px 16px;
+      /* Extend the scroll area edge-to-edge so the next card peeks past the section padding */
+      margin: 0 -20px;
+      padding-left: 20px;
+      padding-right: 20px;
+      scroll-padding-left: 20px;
+    }
+
+    .news-card {
+      /* Fits ~1 card with peek of the next on standard phones */
+      flex-basis: 84vw;
+      max-width: 320px;
+      padding: 18px 20px 16px;
+    }
+
+    .news-title {
+      font-size: 15px;
+    }
+
+    .news-summary {
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    /* Hide buttons on touch devices — swipe is the primary affordance */
+    .carousel-btn {
+      display: none !important;
+    }
+  }
+
+  /* On larger desktop, hide the swipe hint since arrows + cursor make affordance obvious */
+  @media (min-width: 769px) {
+    .news-hint {
+      display: none;
+    }
+  }
+</style>
