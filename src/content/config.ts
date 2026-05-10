@@ -34,4 +34,19 @@ const columns = defineCollection({
   }),
 });
 
-export const collections = { events, columns };
+const news = defineCollection({
+  type: 'content',
+  schema: z.object({
+    date: z.date(),
+    sourceZh: z.string(),
+    sourceEn: z.string(),
+    titleZh: z.string(),
+    titleEn: z.string(),
+    summaryZh: z.string(),
+    summaryEn: z.string(),
+    url: z.string().url(),
+    featured: z.boolean().default(true),
+  }),
+});
+
+export const collections = { events, columns, news };
