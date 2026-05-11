@@ -5,5 +5,8 @@ titleEn: "She Could Make Thugs Cry and Swing Nunchucks Like Bruce Lee: My Vietna
 authorZh: 捲毛
 authorEn: Juan-Mao
 url: https://opinion.cw.com.tw/blog/profile/531/article/16862
+image: /columns/02-juan-mao.jpg
+imageAltZh: 文章封面：身著白衣的人在落日下打太極
+imageAltEn: "Article cover: a figure in white practising tai chi at sunset"
 featured: true
 ---

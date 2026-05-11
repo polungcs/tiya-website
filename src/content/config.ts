@@ -30,6 +30,10 @@ const columns = defineCollection({
     authorEn: z.string(),
     url: z.string().url(),
     platform: z.string().default('獨立評論@天下'),
+    /** Optional thumbnail under /public, e.g. "/columns/foo.jpg". 480×384-ish 5:4 JPG. */
+    image: z.string().optional(),
+    imageAltZh: z.string().optional(),
+    imageAltEn: z.string().optional(),
     featured: z.boolean().default(true),
   }),
 });

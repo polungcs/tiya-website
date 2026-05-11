@@ -20,6 +20,8 @@ const articles = all
     titleEn: entry.data.titleEn,
     author: entry.data.authorZh,
     authorEn: entry.data.authorEn,
+    image: entry.data.image,
+    imageAlt: isEn ? (entry.data.imageAltEn ?? entry.data.titleEn) : (entry.data.imageAltZh ?? entry.data.titleZh),
   }));
 ---
 
@@ -44,6 +46,11 @@ const articles = all
           {articles.map(a => (
             <a class="article" href={a.href} target="_blank" rel="noopener">
               <div class="article-num">{a.num}</div>
+              {a.image && (
+                <div class="article-thumb">
+                  <img src={a.image} alt={a.imageAlt} loading="lazy" decoding="async" width="120" height="96" />
+                </div>
+              )}
               <div class="article-body">
                 <h3>{isEn ? a.titleEn : a.title}</h3>
                 <div class="article-author">
@@ -247,12 +254,12 @@ const articles = all
 
   .article {
     display: grid;
-    grid-template-columns: 60px 1fr auto;
-    gap: 24px;
+    grid-template-columns: 60px 130px 1fr auto;
+    gap: 22px;
     padding: 22px 16px;
     margin: 0 -16px;
     border-bottom: 1px solid var(--line);
-    align-items: start;
+    align-items: center;
     text-decoration: none;
     color: inherit;
     transition: background 0.15s;
@@ -269,6 +276,27 @@ const articles = all
     color: var(--terra-deep);
     font-weight: 500;
     line-height: 1;
+    align-self: center;
+  }
+
+  .article-thumb {
+    width: 130px;
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--cream-warm);
+  }
+
+  .article-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .article:hover .article-thumb img {
+    transform: scale(1.05);
   }
 
   .article-body h3 {
@@ -332,14 +360,18 @@ const articles = all
     }
 
     .article {
-      grid-template-columns: 40px 1fr auto;
-      gap: 14px;
-      padding: 18px 8px;
+      grid-template-columns: 36px 72px 1fr auto;
+      gap: 12px;
+      padding: 16px 8px;
       margin: 0 -8px;
     }
 
     .article-num {
-      font-size: 28px;
+      font-size: 26px;
+    }
+
+    .article-thumb {
+      width: 72px;
     }
 
     .article-body h3 {

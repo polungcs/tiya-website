@@ -5,5 +5,8 @@ titleEn: "Without Finishing Elementary School in Vietnam, I Self-Studied My Way 
 authorZh: 柏凱
 authorEn: Bo-Kai
 url: https://opinion.cw.com.tw/blog/profile/531/article/16527
+image: /columns/01-bo-kai.jpg
+imageAltZh: 文章封面：少年在書架間席地閱讀
+imageAltEn: "Article cover: a young man reading on the floor between library shelves"
 featured: true
 ---
