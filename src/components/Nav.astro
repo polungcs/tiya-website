@@ -13,6 +13,7 @@ const base = isEn ? '/en' : '';
 const links = isEn
   ? [
       { label: 'About',    href: `${base}/#about` },
+      { label: 'News',     href: `${base}/#news` },
       { label: 'Events',   href: `${base}/#events` },
       { label: 'Column',   href: `${base}/#column` },
       { label: 'Donation', href: `${base}/#donate` },
@@ -20,6 +21,7 @@ const links = isEn
     ]
   : [
       { label: '關於我們', href: '#about' },
+      { label: '媒體報導', href: '#news' },
       { label: '實體活動', href: '#events' },
       { label: '專欄',     href: '#column' },
       { label: '捐款資訊', href: '#donate' },
@@ -144,31 +146,39 @@ const links = isEn
     .nav-items {
       /* Floating cream-warm band: edge-to-edge + soft drop shadow */
       margin: 16px -16px 0;
-      padding: 14px 8px;
+      padding: 6px 8px;
       background: var(--cream-warm);
       border-top: 1px solid var(--line);
       border-left: 0;
       box-shadow:
         0 -1px 3px rgba(0, 0, 0, 0.03),
         0 4px 12px rgba(184, 64, 30, 0.08);
-      /* All five items on one row, evenly distributed */
-      flex-wrap: nowrap;
-      justify-content: space-evenly;
+      /* Six items → 3-column × 2-row grid keeps tap targets large */
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 0;
       font-size: 15px;
       font-weight: 500;
     }
 
     .nav-items a {
-      padding: 8px 8px;
+      padding: 10px 6px;
       letter-spacing: 0.04em;
       white-space: nowrap;
+      text-align: center;
     }
 
-    /* Subtle vertical divider between items so they read as
-       distinct options instead of one run-on text block. */
-    .nav-items a:not(:last-child) {
+    /* Dividers: vertical between columns, horizontal between the two rows.
+       The grid order is 1 2 3 / 4 5 6 — so right border on items 1,2,4,5
+       (those NOT at the end of a row), and bottom border on the first row
+       (items 1,2,3). */
+    .nav-items a:nth-child(3n+1),
+    .nav-items a:nth-child(3n+2) {
       border-right: 1px solid rgba(184, 64, 30, 0.22);
+    }
+
+    .nav-items a:nth-child(-n+3) {
+      border-bottom: 1px solid rgba(184, 64, 30, 0.22);
     }
   }
 
@@ -179,7 +189,7 @@ const links = isEn
     }
 
     .nav-items a {
-      padding: 8px 4px;
+      padding: 9px 4px;
       letter-spacing: 0.02em;
     }
   }
