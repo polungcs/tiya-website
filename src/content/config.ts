@@ -45,6 +45,10 @@ const news = defineCollection({
     summaryZh: z.string(),
     summaryEn: z.string(),
     url: z.string().url(),
+    /** Relative path under /public, e.g. "/news/foo.jpg". 1200px wide JPG/WebP, ≥3:2 ratio (card crops to 16:9). */
+    image: z.string(),
+    imageAltZh: z.string().optional(),
+    imageAltEn: z.string().optional(),
     featured: z.boolean().default(true),
   }),
 });
