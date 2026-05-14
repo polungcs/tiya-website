@@ -83,6 +83,39 @@ const articles = all
         </div>
       </div>
     </div>
+
+    <!-- Submit CTA — closing invitation for the column section -->
+    <div class="submit-cta">
+      <div class="submit-text">
+        <h3 class="submit-title">{isEn ? 'Submit Your Story' : '我要投稿'}</h3>
+        <p class="submit-desc">
+          {isEn
+            ? 'Want to be the next contributor to New-Generation Phonograph? Reach out through any channel below.'
+            : '想成為新二代留聲機的下一位作者？歡迎透過以下任一管道與我們聯繫。'}
+        </p>
+      </div>
+      <div class="submit-channels">
+        <a class="submit-email" href="mailto:2024tiya@gmail.com" aria-label={isEn ? 'Email us' : '寄信給我們'}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
+          </svg>
+          <span>2024tiya@gmail.com</span>
+        </a>
+        <a class="submit-icon" href="https://www.facebook.com/TWmigrantchamber/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M22 12C22 6.48 17.52 2 12 2S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+          </svg>
+        </a>
+        <a class="submit-icon" href="https://www.instagram.com/2023_tiya/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+          </svg>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -323,6 +356,99 @@ const articles = all
     transform: translateX(4px);
   }
 
+  /* ── Submit CTA: invitation panel below the article list ── */
+  .submit-cta {
+    margin-top: 40px;
+    padding: 28px 32px;
+    background: white;
+    border-left: 3px solid var(--terra);
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 28px;
+    box-shadow: 0 1px 3px rgba(184, 64, 30, 0.06);
+  }
+
+  .submit-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .submit-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 460px;
+  }
+
+  .submit-channels {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  /* Email pill: terra outline, fills on hover */
+  .submit-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 18px;
+    border: 1px solid var(--terra);
+    border-radius: 999px;
+    color: var(--terra-deep);
+    text-decoration: none;
+    font-family: 'IBM Plex Sans', 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  }
+
+  .submit-email svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .submit-email:hover,
+  .submit-email:focus-visible {
+    background: var(--terra-deep);
+    border-color: var(--terra-deep);
+    color: white;
+  }
+
+  /* Circular icon buttons for FB / IG */
+  .submit-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream-warm);
+    color: var(--terra-deep);
+    border: 1px solid var(--line);
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+  }
+
+  .submit-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .submit-icon:hover,
+  .submit-icon:focus-visible {
+    background: var(--terra-deep);
+    color: white;
+    transform: translateY(-2px);
+  }
+
   /* ── Mobile (≤768px) ── */
   @media (max-width: 768px) {
     .section {
@@ -376,6 +502,35 @@ const articles = all
 
     .article-body h3 {
       font-size: 15px;
+    }
+
+    /* Submit CTA: stack on mobile so the channels sit below the invitation */
+    .submit-cta {
+      margin-top: 32px;
+      padding: 22px 20px 20px;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .submit-title {
+      font-size: 19px;
+    }
+
+    .submit-channels {
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .submit-email {
+      padding: 10px 14px;
+      font-size: 12px;
+      /* Allow the long email to wrap if needed — keeps button on one row otherwise */
+      word-break: break-all;
+    }
+
+    .submit-icon {
+      width: 42px;
+      height: 42px;
     }
   }
 </style>
