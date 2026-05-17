@@ -1,6 +1,6 @@
 # 移青陣官方網站 改善建議報告
 
-> 撰寫日期：2026-05-17（v1.1，依協會回饋修訂）
+> 撰寫日期：2026-05-17（v1.2，加入 Threads 連結後微調）
 > 用途：給協會例會討論、後續網站改版規劃的依據
 > 目前內部 demo 網址：<https://tiya-website.leepolung1.workers.dev/>
 > **狀態：尚未正式對外公開，仍在內部 demo 階段**
@@ -30,7 +30,7 @@
 | Events 實體活動 | 卡片式，Facebook 貼文嵌入，目前 2 場 | ✅ |
 | Column 天下獨立評論專欄 | 3 篇文章＋縮圖＋「我要投稿」CTA（Call to Action，呼籲動作） | ✅ |
 | Donate 捐款資訊 | 法律免責聲明、匯款帳戶（戶名／銀行／帳號目前為「待確認」） | 🟡 **帳戶已開戶，等填入實際資訊** |
-| Social 社群連結 | Facebook、Instagram、Email | ✅（**可考慮加 Threads** — 協會已有官方帳號） |
+| Social 社群連結 | Facebook、Instagram、Threads、Email | ✅ |
 | Footer 頁尾 | 聯絡、社群、版權 | ✅ |
 
 ### 1.2 技術基底（含一些對非工程背景的解釋）
@@ -160,9 +160,8 @@
 
 ### 3.7 Social 社群連結
 
-**目前狀況**：Facebook、Instagram、Email。
+**目前狀況**：Facebook、Instagram、**Threads**（2026-05-17 加入）、Email。
 **建議**：
-- **加入 Threads 連結** — 協會已有 Threads 官方帳號，沒理由不放。
 - **YouTube／Podcast**：如果未來協會有產出影音內容，再加。
 
 ---
@@ -296,5 +295,5 @@
 
 ---
 
-*文件版本：v1.1 / 2026-05-17（依協會回饋大幅修訂）*
+*文件版本：v1.2 / 2026-05-17（加入 Threads 連結後微調 Social 相關段落）*
 *下一步：例會討論後依結論修訂為 v2.0。*

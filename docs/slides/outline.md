@@ -50,7 +50,7 @@
 | Events | 實體活動（FB 嵌入，2 場） | ✅ |
 | Column | 天下獨立評論專欄 3 篇＋投稿 CTA | ✅ |
 | Donate | 免責聲明＋匯款資訊 | 🟡 帳戶已開戶，待填 |
-| Social | FB、IG、Email | ✅ 可加 Threads |
+| Social | FB、IG、Threads、Email | ✅ |
 | Footer | 聯絡、社群、版權 | ✅ |
 
 ---
@@ -152,7 +152,7 @@
 - **3.4 Events** — 已經夠用。可加：觀眾回饋摘要、活動影音 highlight。
 - **3.5 Column** — 投稿描述改成「歡迎任何人投稿」（不只成員）。加一句「我們提供寫作協助，沒寫過文章的也可以投」。
 - **3.6 Donate** — 等帳戶資訊到位就把「待確認」換成實際資訊。沒有急迫性。
-- **3.7 Social** — 加入 Threads 連結（協會已有官方帳號）。YouTube / Podcast 等有影音內容再加。
+- **3.7 Social** — 已加入 Threads 連結（2026-05-17 完成）。YouTube / Podcast 等有影音內容再加。
 
 ---
 
