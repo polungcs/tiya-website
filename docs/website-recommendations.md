@@ -279,21 +279,5 @@
 
 ---
 
-## 附錄：例會呈現形式
-
-你決定了：**會前文件 + 開會簡報 並用**。
-
-**會前文件**：就是本檔（`docs/website-recommendations.md`），會議前一週傳給協會成員預讀。
-- 線上閱讀：<https://github.com/polungcs/tiya-website/blob/main/docs/website-recommendations.md>
-- 可下載成 PDF（VS Code、Typora、或 GitHub 上轉印列印都可以）
-
-**開會簡報**：要用 **Google Slides**。會給你兩種版本，自己挑：
-1. **`docs/slides/tiya-website-recommendations.pptx`** — 完整排好版的 PowerPoint 檔。匯入 Google Slides 步驟：上傳到 Google Drive → 點兩下打開 → 介面會自動以 Google Slides 開啟、轉檔，排版/字體/版面基本上會保留，可以直接編輯。
-2. **`docs/slides/outline.md`** — 純文字大綱版（每張投影片寫什麼一行一行列出來）。你可以拿來照著手動建 Google Slides（從頭排自己想要的版型），或當成講稿。
-
-> 為什麼不直接做 Google Slides？技術原因：我目前可用的工具裡有 PowerPoint（pptx）skill，但**沒有 Google Slides skill**。`.pptx` 是業界通用格式，Google Slides 可以無痛接收，所以這條路最實際。
-
----
-
-*文件版本：v1.2 / 2026-05-17（加入 Threads 連結後微調 Social 相關段落）*
+*文件版本：v1.2 / 2026-05-17*
 *下一步：例會討論後依結論修訂為 v2.0。*
