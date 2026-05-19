@@ -28,3 +28,7 @@ npm-debug.log*
 /logo-tiya-horizontal.png
 /logo-tiya-square.png
 /logo.png
+
+# Office temp/lock files
+~$*
+.~lock.*
